@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  # MongoDB service
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  # Node API service
+  web:
+    build:
+      context: .
+    ports:
+      - 4000:3000
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo_db:27017
+      DB_NAME: my_db
+      NAME: isaboke
+    depends_on:
+      - mongo_db
+    volumes:
+      - ./app:/app
+
+volumes:
+  mongo_db: {}
+

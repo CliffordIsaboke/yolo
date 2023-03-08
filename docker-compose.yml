@@ -4,17 +4,28 @@ services:
   # MongoDB service
   mongo_db:
     container_name: db_container
-    image: mongo:latest
+    image: mongo:5.0.4
     restart: always
     volumes:
       - mongo_db:/data/db
 
-  # Node API service
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo_db
+
+  # Frontend service
   web:
     build:
-      context: .
+      context: ./client
+      dockerfile: Dockerfile
     ports:
-      - 4000:3000
+      - "3000:3000"
     environment:
       PORT: 3000
       MONGODB_URI: mongodb://mongo_db:27017
@@ -22,9 +33,7 @@ services:
       NAME: isaboke
     depends_on:
       - mongo_db
-    volumes:
-      - ./app:/app
 
 volumes:
-  mongo_db: {}
+  mongo_db:
 

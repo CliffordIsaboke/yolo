@@ -4,7 +4,7 @@ services:
   # MongoDB service
   mongo_db:
     container_name: db_container
-    image: mongo:5.0.4
+    image: mongo:latest
     restart: always
     volumes:
       - mongo_db:/data/db
@@ -30,7 +30,7 @@ services:
       PORT: 3000
       MONGODB_URI: mongodb://mongo_db:27017
       DB_NAME: my_db
-      NAME: isaboke
+    
     depends_on:
       - mongo_db
 

@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-#Backend services
+  # Backend services
   backend:
     build:
       context: ./backend
@@ -21,7 +21,8 @@ services:
     image: yolofront:v1.0
     ports:
       - "4000:3000"
-    #restart: always
+    depends_on:
+      - backend # Added line specifying dependency
     environment:
       PORT: 3000
       MONGODB_URI: MongoDB://my-cloud-mongodb-instance:27017 

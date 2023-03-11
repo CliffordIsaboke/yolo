@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+#Backend services
   backend:
     build:
       context: ./backend
@@ -8,6 +9,8 @@ services:
     ports:
       - "8081:8081"
     restart: always
+    volumes:
+      - backend-data:/app/data
     networks:
       - yolo
 
@@ -21,10 +24,16 @@ services:
     #restart: always
     environment:
       PORT: 3000
-      MONGODB_URI: MongoDB://MongoDB:27017 
+      MONGODB_URI: MongoDB://my-cloud-mongodb-instance:27017 
       DB_NAME: yolomy
+    volumes:
+      - frontend-data:/app/data
     networks:
       - yolo
+
+volumes:
+  backend-data:
+  frontend-data:
 
 networks:
   yolo:

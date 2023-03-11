@@ -8,6 +8,8 @@ services:
     ports:
       - "8081:8081"
     restart: always
+    networks:
+      - yolo
 
   # Frontend service
   web:
@@ -16,10 +18,14 @@ services:
     image: yolofront:v1.0
     ports:
       - "4000:3000"
-    restart: always
+    #restart: always
     environment:
       PORT: 3000
       MONGODB_URI: MongoDB://MongoDB:27017 
       DB_NAME: yolomy
-    
+    networks:
+      - yolo
 
+networks:
+  yolo:
+    driver: bridge

@@ -37,7 +37,8 @@
 
 
 3. Docker-compose Networking (Application port allocation and a bridge network implementation) where necessary.
-    Each container in the application exposes its own ports, which are mapped to the host machine's ports using the ports configuration option in the docker-compose.yml file. This allows the containers to communicate with each other over the default Docker network, but also allows external access to the containers' services.
+    Each container in the application exposes its own ports, which are mapped to the host machine's ports using the ports configuration option in the docker-compose.yml file. This allows the containers to communicate with each other over the yolo_yolo Docker network, but also allows external access to the containers' services.
+    The containers are comunicating through a custom netwok known as yolo_yolo
 
 
 4. Docker-compose volume definition and usage (where necessary).

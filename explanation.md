@@ -53,5 +53,16 @@
     I was not able to view the page of the application. We app was existion with error code 0.
 
 7. Good practices such as Docker image tag naming standards for ease of identification of images and containers. 
+    Use descriptive names: Use names that are meaningful and descriptive to identify the image and its purpose. Avoid using generic names or abbreviations that might be confusing later on.
+
+    Include version information: Including version information in the tag name helps to identify the specific version of the image being used. It is recommended to use semantic versioning, such as major.minor.patch, to indicate the changes made in each version.
+
+    Use lowercase: Always use lowercase letters for tag names to avoid issues with case sensitivity when running Docker commands.
+
+    Use dashes to separate words: Use dashes instead of underscores or camelCase to separate words in tag names, as this is the convention used in Docker.
+
+    Avoid special characters: Avoid using special characters such as underscores, spaces, or colons in tag names, as these can cause issues when running Docker commands.
+
+    Use the latest tag with caution: Avoid using the latest tag for images, as this can lead to confusion about which version of the image is being used. Instead, use specific version tags or use a separate latest tag that is updated only when a new stable version of the image is released.
 
   

@@ -39,10 +39,19 @@
 3. Docker-compose Networking (Application port allocation and a bridge network implementation) where necessary.
     Each container in the application exposes its own ports, which are mapped to the host machine's ports using the ports configuration option in the docker-compose.yml file. This allows the containers to communicate with each other over the default Docker network, but also allows external access to the containers' services.
 
-    
+
 4. Docker-compose volume definition and usage (where necessary).
     Docker Compose provides a way to define and manage volumes for containers within a multi-container Docker application. Volumes are used to persist data between container restarts and allow containers to share data with each other.
 
-Git workflow used to achieve the task.
-Successful running of the applications and if not, debugging measures applied.
-Good practices such as Docker image tag naming standards for ease of identification of images and containers. 
+5. Git workflow used to achieve the task.
+    -Create a Git repository for the web application and clone it locally.
+    -Write the Dockerfile for the web application and create a .dockerignore file to exclude unnecessary files and directories.
+    -Create a deployment script that uses docker-compose command to deploy the Dockerized web application on the server.
+    -Push the changes to the Git repository using git push command.
+    
+6. Successful running of the applications and if not, debugging measures applied.
+    I was not able to view the page of the application. We app was existion with error code 0.
+
+7. Good practices such as Docker image tag naming standards for ease of identification of images and containers. 
+
+  

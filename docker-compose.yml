@@ -4,6 +4,7 @@ services:
   backend:
     build:
       context: ./backend
+    image: yoloback:v1.0
     ports:
       - "8081:8081"
     restart: always
@@ -12,7 +13,7 @@ services:
   web:
     build:
       context: ./client
-    image: yolo:v1.0
+    image: yolofront:v1.0
     ports:
       - "4000:3000"
     restart: always

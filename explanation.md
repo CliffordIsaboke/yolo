@@ -46,13 +46,13 @@
 
 
 # 3. Docker-compose Networking (Application port allocation and a bridge network implementation) where necessary.
-    Each container in the application exposes its own ports, which are mapped to the host machine's ports using the ports configuration option in the         docker-compose.yml file. This allows the containers to communicate with each other over the yolo_yolo Docker network, but also allows external access     to the containers' services.
-    The containers are comunicating through a custom netwok known as yolo_yolo
+    Each container in the application exposes its own ports, which are mapped to the host machine's ports using the ports configuration option in the           docker-compose.yml file. 
+    This allows the containers to communicate with each other over the yolo_yolo Docker network, but also allows external access to the containers'             services. The containers are comunicating through a custom netwok known as yolo_yolo
 
 
 # 4. Docker-compose volume definition and usage (where necessary).
-    Docker Compose provides a way to define and manage volumes for containers within a multi-container Docker application. 
-    Volumes are used to persist data between container restarts and allow containers to share data with each other.
+     Docker Compose provides a way to define and manage volumes for containers within a multi-container Docker application. 
+     Volumes are used to persist data between container restarts and allow containers to share data with each other.
 
 # 5. Git workflow used to achieve the task.
     -Create a Git repository for the web application and clone it locally.
@@ -64,17 +64,17 @@
     I was not able to view the page of the application. We app was existion with error code 0.
 
 # 7. Good practices such as Docker image tag naming standards for ease of identification of images and containers. 
-    Use descriptive names: Use names that are meaningful and descriptive to identify the image and its purpose. 
-    Avoid using generic names or abbreviations that might be confusing later on.
+     -Use descriptive names: Use names that are meaningful and descriptive to identify the image and its purpose. 
+      Avoid using generic names or abbreviations that might be confusing later on.
 
-    Include version information: Including version information in the tag name helps to identify the specific version of the image being used. 
-    It is recommended to use semantic versioning, such as major.minor.patch, to indicate the changes made in each version.
+     -Include version information: Including version information in the tag name helps to identify the specific version of the image being used. 
+      It is recommended to use semantic versioning, such as major.minor.patch, to indicate the changes made in each version.
 
-    Use lowercase: Always use lowercase letters for tag names to avoid issues with case sensitivity when running Docker commands.
+     -Use lowercase: Always use lowercase letters for tag names to avoid issues with case sensitivity when running Docker commands.
 
-    Use dashes to separate words: Use dashes instead of underscores or camelCase to separate words in tag names.
+     -Use dashes to separate words: Use dashes instead of underscores or camelCase to separate words in tag names.
 
-    Avoid special characters: Avoid using special characters such as underscores, spaces, or colons in tag names.
+     -Avoid special characters: Avoid using special characters such as underscores, spaces, or colons in tag names.
 
-    Use the latest tag with caution: Avoid using the latest tag for images.
+     -Use the latest tag with caution: Avoid using the latest tag for images.
   

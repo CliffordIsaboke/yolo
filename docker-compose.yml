@@ -22,7 +22,7 @@ services:
     ports:
       - "4000:3000"
     depends_on:
-      - backend # Added line specifying dependency
+      - backend 
     environment:
       PORT: 3000
       MONGODB_URI: MongoDB://my-cloud-mongodb-instance:27017 

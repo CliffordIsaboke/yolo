@@ -1,4 +1,4 @@
-#1. Choice of the base image on which to build each container.
+##1. Choice of the base image on which to build each container.
 
     Security: The base image was from a reputable source and have a good security record. 
 

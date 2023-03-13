@@ -61,7 +61,7 @@
     -Push the changes to the Git repository using git push command.
     
 # 6. Successful running of the applications and if not, debugging measures applied.
-    I was not able to view the page of the application. We app was existion with error code 0.
+    I was not able to view the page of the application. The app was exiting with error code 0.
 
 # 7. Good practices such as Docker image tag naming standards for ease of identification of images and containers. 
      -Use descriptive names: Use names that are meaningful and descriptive to identify the image and its purpose. 

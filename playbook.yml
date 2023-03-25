@@ -3,7 +3,7 @@
   become: true
 
   tasks:
-    - name: Update APT cache
+    - name: update YUM cache
       apt:
         update_cache: yes
       tags:
@@ -27,32 +27,6 @@
         dest: /home/vagrant/myapp
         version: master
       register: git_clone
-
-    - name: Build and start Docker containers
-      docker_compose:
-        project_name: myapp
-        build:
-          context: /home/vagrant/myapp/backend
-          dockerfile: Dockerfile
-        image: myapp:backend
-        extra_args: --force-rm
-        pull: no
-        remove_image: no
-        recreate: no
-        state: present
-        restart_policy: always
-        volumes:
-          - backend-data:/app/data
-        ports:
-          - "8081:8081"
-        networks:
-          - myapp
-
-  vars:
-    docker_compose_version: "1.29.2"
-    mongodb_uri: MongoDB://my-cloud-mongodb-instance:27017
-    mongodb_database: yolomy
-    mongodb_collection: myCollection
 
   roles:
     - role: client

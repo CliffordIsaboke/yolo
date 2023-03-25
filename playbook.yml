@@ -5,7 +5,7 @@
   tasks:
     - name: update YUM cache
       apt:
-        update_cache: yes
+        update_cache: true
       tags:
         - setup
 

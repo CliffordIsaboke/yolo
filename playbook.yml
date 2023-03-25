@@ -1,35 +1,32 @@
----
 - name: Setup Docker containers for e-commerce website
   hosts: all
   become: true
 
   tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+      tags:
+        - setup
+
+    - name: Install Python packages
+      apt:
+        name:
+          - python3-pip
+          - python3-dev
+          - build-essential
+          - python-apt
+        state: present
+      tags:
+        - setup
+        - dependencies
+
     - name: Clone code from GitHub repository
       git:
         repo: https://github.com/CliffordIsaboke/yolo.git
         dest: /home/vagrant/myapp
         version: master
       register: git_clone
-
-    - name: Install Python dependencies
-      block:
-        - name: Update APT cache
-          apt:
-            update_cache: yes
-          tags:
-            - setup
-
-        - name: Install Python packages
-          apt:
-            name:
-              - python3-pip
-              - python3-dev
-              - build-essential
-              - python-apt
-            state: present
-          tags:
-            - setup
-            - dependencies
 
     - name: Build and start Docker containers
       docker_compose:

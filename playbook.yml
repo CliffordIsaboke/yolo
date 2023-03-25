@@ -64,6 +64,3 @@
     - role: backend
       tags:
         - backend
-    - role: database
-      tags:
-        - database

@@ -24,9 +24,9 @@
             - dependencies
   vars:
     docker_compose_version: "1.29.2"
-    mongodb_uri: "mongodb+srv://clifford:Cmo0KNN84HuMuftS@isaboke.wdbovod.mongodb.net/yolomy?retryWrites=true&w=majority"
-    mongodb_database: "yolomy"
-    mongodb_collection: "myCollection"
+    mongodb_uri: MongoDB://my-cloud-mongodb-instance:27017
+    mongodb_database: yolomy
+    mongodb_collection: myCollection
 
   roles:
     - role: client

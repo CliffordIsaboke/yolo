@@ -6,7 +6,7 @@
   tasks:
     - name: Clone code from GitHub repository
       git:
-        repo: https://github.com/myusername/myrepo.git
+        repo: https://github.com/CliffordIsaboke/yolo.git
         dest: /home/vagrant/myapp
         version: master
       register: git_clone

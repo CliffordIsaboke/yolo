@@ -1,88 +1,40 @@
----
-- name: Deploy Node.js App with Cloud MongoDB
+- name: Setup Docker containers for e-commerce website
   hosts: all
   become: true
 
-  vars:
-    app_name: myapp
-    app_port: 3000
-    node_version: "14.x"
-    mongo_connection_string: "mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/test?retryWrites=true&w=majority"
-
-  pre_tasks:
-    - name: Install Node.js and System Dependencies
+  tasks:
+    - name: Install Python dependencies
       block:
-        - name: Add Node.js PPA
-          apt_repository:
-            repo: "deb https://deb.nodesource.com/node_{{ node_version }} {{ ansible_distribution_release }} main"
-            state: present
-            update_cache: yes
-            keyserver: keyserver.ubuntu.com
-            key_id: "A1715D88E1DF1F24"
-        - name: Install Node.js and System Dependencies
+        - name: Update APT cache
           apt:
-            name: "{{ item }}"
-            state: present
             update_cache: yes
-          with_items:
-            - nodejs
-            - build-essential
-            - python
-            - python-pip
-            - python-dev
-            - libffi-dev
-            - libssl-dev
+          tags:
+            - setup
+
+        - name: Install Python packages
+          apt:
+            name:
+              - python3-pip
+              - python3-dev
+              - build-essential
+              - python-apt
+            state: present
+          tags:
+            - setup
+            - dependencies
+  vars:
+    docker_compose_version: "1.29.2"
+    mongodb_uri: "mongodb+srv://clifford:Cmo0KNN84HuMuftS@isaboke.wdbovod.mongodb.net/yolomy?retryWrites=true&w=majority"
+    mongodb_database: "yolomy"
+    mongodb_collection: "myCollection"
 
   roles:
-    - role: frontend
-      vars:
-        app_name: "{{ app_name }}"
-        app_port: "{{ app_port }}"
-        mongo_url: "{{ mongo_connection_string }}"
+    - role: client
+      tags:
+        - client
     - role: backend
-      vars:
-        app_name: "{{ app_name }}"
-        app_port: "{{ app_port }}"
-        mongo_url: "{{ mongo_connection_string }}"
-
-  tasks:
-    - name: Install Node.js Packages
-      npm:
-        name: "{{ item }}"
-        global: yes
-      with_items:
-        - pm2
-        - gulp-cli
-        - mongodb
-        - mongoose
       tags:
-        - setup
-        - dependencies
-
-    - name: Configure Nginx
-      block:
-        - name: Remove Default Nginx Configuration
-          file:
-            path: /etc/nginx/sites-enabled/default
-            state: absent
-        - name: Add Custom Nginx Configuration
-          template:
-            src: templates/nginx.conf.j2
-            dest: /etc/nginx/sites-enabled/{{ app_name }}
+        - backend
+    - role: database
       tags:
-        - setup
-        - nginx
-
-    - name: Start Services
-      block:
-        - name: Start Node.js App
-          command: "pm2 start /opt/{{ app_name }}/backend/server.js --name '{{ app_name }}'"
-          async: 30
-          poll: 5
-        - name: Reload Nginx
-          service:
-            name: nginx
-            state: reloaded
-      tags:
-        - setup
-        - services
+        - database

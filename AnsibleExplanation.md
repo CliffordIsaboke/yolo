@@ -9,5 +9,3 @@ The task was achived by vagrant provisioning as follows:
 
 -A playbook was developed with the name"playbook.yml" The playbook was to create images for the backend and the client that are able to connect to the cloud mongoDB. The playbook uses 2 roles i.e backend role and the client role. The playbook also uses tags and blocks.
 -playbook is made to clone the code from GitHub and run the necessary setups.
-
-##

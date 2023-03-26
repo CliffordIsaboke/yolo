@@ -14,3 +14,4 @@ The task was achived by vagrant provisioning as follows:
 
 -checked out in the stage two created a folder called stage two.
 -created a vagrant configuration file that i used to provision a server with IP address 192.168.60.4
+-Define the hostname and as well as the app name.

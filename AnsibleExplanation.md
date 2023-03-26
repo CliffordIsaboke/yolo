@@ -7,4 +7,4 @@ The task was achived by vagrant provisioning as follows:
 
 ## Set up the playbook in the root directory/folder of the main project. Try to implement the use of the following concepts in tasks definition your playbook:Variables (variable files will earn you bonus points if deemed necessary).Roles in the implementation of various tasks (for example the front end logic/containerization).Blocks and tags for ease of assessment and as a good coding practice as well.
 
--A playbook was developed with the name"playbook.yml" The playbook was to create images for the backend and the client images nad connects to the cloud mongoDB. The playbook uses 2 roles i.e backend role and the client role. The playbook also uses tags and blocks.
+-A playbook was developed with the name"playbook.yml" The playbook was to create images for the backend and the client images that are able to connect to the cloud mongoDB. The playbook uses 2 roles i.e backend role and the client role. The playbook also uses tags and blocks.

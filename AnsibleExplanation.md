@@ -13,6 +13,6 @@ The playbook also uses tags and blocks.
 
 ## In the same directory checkout into a branch named "Stage_two". Create a new directory in the stage-1-Ansible-root folder and name it after the branch you just checked into.In this directory, you'll use Terraform for resource provisioning and Ansible for server configuration and application deployment, together in order to create a new environment. From an infrastructure perspective, we’ll try to keep things simple and build a similar stack to the one we created in stage 1 above with regards to containerization and the use of a vagrant provisioned server.
 
--checked out in the stage two created a folder called stage two.
+-checked out in the stage_two and created a folder called stage two.
 -created a vagrant configuration file that i used to provision a server with IP address 192.168.60.4
 -Define the hostname and as well as the app name.

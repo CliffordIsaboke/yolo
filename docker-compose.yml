@@ -25,7 +25,7 @@ services:
       - backend 
     environment:
       PORT: 3000
-      MONGODB_URI: MongoDB://my-cloud-mongodb-instance:27017 
+      MONGODB_URI: mongodb_uri 
       DB_NAME: yolomy
     volumes:
       - frontend-data:/app/data

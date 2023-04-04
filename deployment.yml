@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo
+spec:
+  selector:
+    matchLabels:
+      app: yolo
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: yolo
+    spec:
+      containers:
+        - name: front-end
+          image: isaboke/yolofrontend.v1.0
+          ports:
+            - containerPort: 80
+        - name: back-end
+          image: isaboke/yolobackend.v1.0
+          env:
+            - name: MONGO_URI
+              value: MongoDB://my-cloud-mongodb-instance:27017
+          ports:
+            - containerPort: 3000

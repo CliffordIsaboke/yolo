@@ -1,26 +1,90 @@
+# backend-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yolo
+  name: backend-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: yolo
-  replicas: 2
+      app: backend
   template:
     metadata:
       labels:
-        app: yolo
+        app: backend
     spec:
       containers:
-        - name: front-end
-          image: isaboke/yolofrontend.v1.0
-          ports:
-            - containerPort: 80
-        - name: back-end
-          image: isaboke/yolobackend.v1.0
-          env:
-            - name: MONGO_URI
-              value: MongoDB://my-cloud-mongodb-instance:27017
+        - name: backend
+          image: <your-docker-image-name>
           ports:
             - containerPort: 3000
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo-url
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-user
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-password
+
+---
+# backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+---
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: <your-docker-image-name>
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend-service:3000"
+
+---
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

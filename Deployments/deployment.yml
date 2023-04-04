@@ -16,6 +16,13 @@ spec:
       containers:
         - name: backend
           image: isaboke/yolobackend.v1.0
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
           ports:
             - containerPort: 3000
           env:
@@ -68,6 +75,13 @@ spec:
       containers:
         - name: frontend
           image: isaboke/yolofrontend.v1.0
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
           ports:
             - containerPort: 80
           env:

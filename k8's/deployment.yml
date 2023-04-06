@@ -87,7 +87,13 @@ spec:
           env:
             - name: BACKEND_URL
               value: "http://backend-service:3000"
-
+          volumeMounts:
+            - name: www-persistent-storage
+              mountPath: /home/isaboke/storage
+      volumes:
+        - name: www-persistent-storage
+          persistentVolumeClaim:
+            claimName: isaboke-demo-pv
 ---
 # frontend-service.yaml
 apiVersion: v1

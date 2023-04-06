@@ -24,6 +24,7 @@ run it into command line after installation of the gcloud SDK.
 Deployed the above files to cloud using the kubctl create -f <manifets_name.yml>
 From my last docker-compose exercise I was not able to view the the page due to the error
 below.
+At this point I was able to implement the functionality of volumes and labels as per the code
 
 > yolo_app@0.1.0 start /app
 > react-scripts start
@@ -40,3 +41,110 @@ kubectl logs frontend-deployment-8494949d96-5kgdh -c frontend
 
 From the review i realized that the error was the same as the images used were from
 the images created from the last exercise
+
+# backend-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: backend-deployment
+spec:
+replicas: 1
+selector:
+matchLabels:
+app: backend
+template:
+metadata:
+labels:
+app: backend
+spec:
+containers: - name: backend
+image: isaboke/yolobackend.v1.0
+resources:
+limits:
+cpu: "1"
+memory: "512Mi"
+requests:
+cpu: "0.5"
+memory: "256Mi"
+ports: - containerPort: 3000
+env: - name: MONGO_URL
+valueFrom:
+configMapKeyRef:
+name: mongo-config
+key: mongo-url - name: MONGO_USER
+valueFrom:
+secretKeyRef:
+name: mongo-secret
+key: mongo-user - name: MONGO_PASSWORD
+valueFrom:
+secretKeyRef:
+name: mongo-secret
+key: mongo-password
+
+---
+
+# backend-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+name: backend-service
+spec:
+selector:
+app: backend
+ports: - protocol: TCP
+port: 3000
+targetPort: 3000
+
+---
+
+# frontend-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: frontend-deployment
+spec:
+replicas: 1
+selector:
+matchLabels:
+app: frontend
+template:
+metadata:
+labels:
+app: frontend
+spec:
+containers: - name: frontend
+image: isaboke/yolofrontend.v1.0
+resources:
+limits:
+cpu: "1"
+memory: "512Mi"
+requests:
+cpu: "0.5"
+memory: "256Mi"
+ports: - containerPort: 80
+env: - name: BACKEND_URL
+value: "http://backend-service:3000"
+volumeMounts: - name: www-persistent-storage
+mountPath: /home/isaboke/storage
+volumes: - name: www-persistent-storage
+persistentVolumeClaim:
+claimName: isaboke-demo-pv
+
+---
+
+# frontend-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+name: frontend-service
+spec:
+selector:
+app: frontend
+ports: - protocol: TCP
+port: 80
+targetPort: 80
+type: LoadBalancer

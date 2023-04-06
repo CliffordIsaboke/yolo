@@ -27,6 +27,8 @@ below.
 At this point I was able to implement the functionality of volumes by use of pvc and pv files.
 Labels were also implemented at this point as per the code
 
+---
+
 > yolo_app@0.1.0 start /app
 > react-scripts start
 
@@ -35,6 +37,8 @@ Labels were also implemented at this point as per the code
 ℹ ｢wds｣: Content not from webpack is served from /app/public
 ℹ ｢wds｣: 404s will fallback to /
 Starting the development server...
+
+---
 
 I did review the error logs using this command:
 

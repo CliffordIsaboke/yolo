@@ -11,7 +11,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    #path: /home/vagrant/storage
     path: /home/isaboke/storage
 
   nodeAffinity:

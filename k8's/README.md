@@ -24,8 +24,6 @@ run it into command line after installation of the gcloud SDK.
 Deployed the above files to cloud using the kubctl create -f <manifets_name.yml>
 From my last docker-compose exercise I was not able to view the the page due to the error
 below.
-At this point I was able to implement the functionality of volumes by use of pvc and pv files.
-Labels were also implemented at this point as per the code
 
 ---
 
@@ -46,3 +44,5 @@ kubectl logs frontend-deployment-8494949d96-5kgdh -c frontend
 
 From the review i realized that the error was the same as the images used were from
 the images created from the last exercise
+At this point I was able to implement the functionality of volumes by use of pvc and pv files.
+Labels were also implemented at this point as per the code

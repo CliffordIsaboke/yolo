@@ -24,7 +24,8 @@ run it into command line after installation of the gcloud SDK.
 Deployed the above files to cloud using the kubctl create -f <manifets_name.yml>
 From my last docker-compose exercise I was not able to view the the page due to the error
 below.
-At this point I was able to implement the functionality of volumes and labels as per the code
+At this point I was able to implement the functionality of volumes by use of pvc and pv files.
+Labels were also implemented at this point as per the code
 
 > yolo_app@0.1.0 start /app
 > react-scripts start

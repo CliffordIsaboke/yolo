@@ -42,4 +42,4 @@ Starting the development server...
 ---
 
 At this point I was able to implement the functionality of volumes by use of pvc(persistent volume claims) and pv(persistent volume) files.
-Labels were also implemented at this point as per the code
+Labels were also implemented at this point as per the code.

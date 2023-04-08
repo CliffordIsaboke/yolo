@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-volume
+  name: isaboke-demo-pv
 spec:
-  volumeName: mongo-volume
+  volumeName: isaboke-demo-pv
   storageClassName: local-storage
   volumeMode: Filesystem
   accessModes:

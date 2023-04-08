@@ -84,7 +84,7 @@ spec:
             name: mongo-config
   volumeClaimTemplates:
     - metadata:
-        name: mongo-volume
+        name: isaboke-demo-pv
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: local-storage

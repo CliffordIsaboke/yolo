@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /home/isaboke1/storage
+    path: /home/isaboke/storage
 
   nodeAffinity:
     required:
@@ -20,4 +20,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - node2
+                - node1

@@ -14,34 +14,54 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo-statefulset
-  labels:
-    app: mongo
+  name: mongo
 spec:
-  serviceName: mongo-service
-  replicas: 1
   selector:
     matchLabels:
       app: mongo
+  serviceName: "mongo"
+  replicas: 3
   template:
     metadata:
       labels:
         app: mongo
     spec:
-      hostname: mongo-0
-      subdomain: mongo
       containers:
         - name: mongo
           image: mongo:5.0
-          resources:
-            limits:
-              cpu: "1"
-              memory: "512Mi"
-            requests:
-              cpu: "0.5"
-              memory: "256Mi"
-          ports:
-            - containerPort: 27017
+          startupProbe:
+            exec:
+              command:
+                - mongo
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 2
+          livenessProbe:
+            exec:
+              command:
+                - mongo
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 2
+          readinessProbe:
+            exec:
+              command:
+                - mongo
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 1
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 2
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
@@ -53,13 +73,21 @@ spec:
                 secretKeyRef:
                   name: mongo-secret
                   key: mongo-password
+          volumeMounts:
+            - name: mongo-volume
+              mountPath: /data/db
+            - name: mongo-config
+              mountPath: /etc/mongo
+      volumes:
+        - name: mongo-config
+          configMap:
+            name: mongo-config
   volumeClaimTemplates:
     - metadata:
-        name: mysql-store
+        name: mongo-volume
       spec:
-        accessModes:
-          - ReadWriteOnce
-        storageClassName: "manual"
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: demo-storage
         resources:
           requests:
-            storage: 5Gi
+            storage: 1Gi

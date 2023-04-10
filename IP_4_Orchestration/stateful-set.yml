@@ -74,7 +74,7 @@ spec:
                   name: mongo-secret
                   key: mongo-password
           volumeMounts:
-            - name: mongo-volume
+            - name: isaboke-demo-pv
               mountPath: /data/db
             - name: mongo-config
               mountPath: /etc/mongo

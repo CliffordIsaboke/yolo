@@ -1,6 +1,6 @@
 # 1.CREATE IP_4_Orchestration's FOLDER:
 
-The first step was to create the K8's folder to host the manifest files.
+The first step was to create the IP_4_Orchestration's folder to host the manifest files.
 The manifest files created include the following:
 -deployment.yml:To perform backend and front deployments.It was also used to deploy
 the backend service that is use to create connection between the

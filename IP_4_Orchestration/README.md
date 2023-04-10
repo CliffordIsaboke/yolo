@@ -11,7 +11,7 @@ for the client to connect through 34.121.159.237:80
 the database.
 -mongo-congo.yml:The mongo-config.yml file is used to specify the configuration of the
 replica set, including the MongoDB instances that are part of the set, their roles within
-the set (e.g. primary, secondary, or arbiter), and other configurat ion details such as
+the set (e.g. primary, secondary, or arbiter), and other configuration details such as
 the replica set name, authentication settings, and SSL options.
 
 # 2.CREATION OF A CLUSTER:

@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: yolo_frontend
   template:
     metadata:
       labels:
-        app: frontend
+        app: yolo
     spec:
       containers:
         - name: frontend
@@ -38,14 +38,14 @@ kind: Service
 metadata:
   name: frontendservice
   labels:
-    app: yolo-client
+    app: yolo_client
     component: frontend
   annotations:
     description: "Frontend application service"
 spec:
   type: LoadBalancer
   selector:
-    app: yolo-client
+    app: yolo_client
     component: frontend
   ports:
     - name: http

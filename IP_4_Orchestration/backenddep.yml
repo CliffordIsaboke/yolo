@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: yolo_backend
   template:
     metadata:
       labels:
-        app: backend
+        app: yolo
     spec:
       containers:
         - name: backend
@@ -54,7 +54,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: backend-app
+    app: yolo_backend
     tier: backend
   ports:
     - protocol: TCP

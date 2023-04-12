@@ -1,0 +1,54 @@
+---
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: isaboke/yolofrontend:v1.0.0
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+          ports:
+            - containerPort: 1000
+          env:
+            - name: CLIENT_HOST
+              value: "10.24.7.108"
+            - name: CLIENT_PORT
+              value: "5000"
+---
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontendservice
+  labels:
+    app: yolo-client
+    component: frontend
+  annotations:
+    description: "Frontend application service"
+spec:
+  type: LoadBalancer
+  selector:
+    app: yolo-client
+    component: frontend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 1000
+      targetPort: 1000

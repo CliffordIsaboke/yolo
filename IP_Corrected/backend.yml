@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    appName: yolobackend
+    serverClass: backend
+spec:
+  selector:
+    matchLabels:
+      app: backendapp
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backendapp
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: backendapp
+          image: anishadaniels/yolobackend:v1.0.2
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+          ports:
+            - name: http
+              containerPort: 5000
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: server-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: server-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+
+  #Backend service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backendservice
+spec:
+  type: LoadBalancer
+  selector:
+    app: backendapp
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+
+#Backend ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backendservice
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /backendservice/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: backendservice
+                port:
+                  number: 5000

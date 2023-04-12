@@ -43,3 +43,9 @@ Starting the development server...
 
 At this point I was able to implement the functionality of volumes by use of pvc(persistent volume claims) and pv(persistent volume) files.
 Labels were also implemented as well as use of k8s controllers to maintain service availability. The controllers used are stateful sets and replication controller. To facilitate provisioning of volume storage I used local storage class type
+
+# 4.Correction
+
+To resolve the issues above I had to rebuild the docker images again and seperated the frontend and the
+backend codes for readability and ease of troubleshooting.
+The website can be viewed on this URL http://34.173.206.200:3000/

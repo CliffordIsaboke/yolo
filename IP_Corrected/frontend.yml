@@ -28,7 +28,6 @@ spec:
     spec:
       containers:
         - name: client
-          #image: anishadaniels/yoloclient:v1.0.5
           image: isaboke/yolofrontend:v1.0.0
           resources:
             limits:

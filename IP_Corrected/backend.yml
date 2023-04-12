@@ -21,7 +21,8 @@ spec:
     spec:
       containers:
         - name: backendapp
-          image: anishadaniels/yolobackend:v1.0.2
+          #image: anishadaniels/yolobackend:v1.0.2
+          image: isaboke/yolofrontend:v1.0.0
           resources:
             limits:
               cpu: "1"

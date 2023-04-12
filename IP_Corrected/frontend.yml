@@ -28,7 +28,8 @@ spec:
     spec:
       containers:
         - name: client
-          image: anishadaniels/yoloclient:v1.0.5
+          #image: anishadaniels/yoloclient:v1.0.5
+          image: isaboke/yolofrontend:v1.0.0
           resources:
             limits:
               cpu: "1"
@@ -50,7 +51,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: frontendservice
   labels:
     app: yoloclient
     component: frontend

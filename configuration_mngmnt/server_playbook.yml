@@ -1,0 +1,38 @@
+---
+- name: Deploy nginx configuration changes
+  hosts: nginx_servers
+  become: true
+  serial: 50%
+  max_fail_percentage: 20%
+  vars:
+    git_repo: "https://github.com/example/nginx-config.git"
+    git_version: "master"
+  tasks:
+    - name: Clone nginx configuration repo
+      git:
+        repo: "{{ git_repo }}"
+        version: "{{ git_version }}"
+        dest: "/tmp/nginx-config"
+      register: git_clone_result
+      tags: ["git-clone"]
+
+    - name: Copy nginx configuration files
+      copy:
+        src: "/tmp/nginx-config/{{ inventory_hostname }}/nginx.conf"
+        dest: "/etc/nginx/nginx.conf"
+      notify:
+        - restart nginx
+      tags: ["copy-files"]
+
+    - name: Copy nginx SSL certificate files
+      copy:
+        src: "/tmp/nginx-config/{{ inventory_hostname }}/ssl/"
+        dest: "/etc/nginx/ssl/"
+      tags: ["copy-files"]
+
+  handlers:
+    - name: restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+      tags: ["restart-nginx"]

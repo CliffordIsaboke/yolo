@@ -49,3 +49,13 @@ Labels were also implemented as well as use of k8s controllers to maintain servi
 To resolve the issues above I had to rebuild the docker images again and seperated the frontend and the
 backend codes for readability and ease of troubleshooting.
 The website can be viewed on this URL http://34.173.206.200:3000/
+
+# File execution steps:
+>secret.yml
+>mongo-config.yml
+>pv_statefulset.yml
+>pvc_statefulset.yml
+>statefulset.yml
+>backenddep.yml
+>frontend.yml
+

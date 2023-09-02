@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: yolo
+        app: yolo_backend
     spec:
       containers:
         - name: backend
@@ -55,7 +55,7 @@ spec:
   type: LoadBalancer
   selector:
     app: yolo_backend
-    tier: backend
+  
   ports:
     - protocol: TCP
       port: 3000

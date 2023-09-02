@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: yolo
+        app: yolo_frontend
     spec:
       containers:
         - name: frontend
@@ -38,15 +38,13 @@ kind: Service
 metadata:
   name: frontendservice
   labels:
-    app: yolo_client
-    component: frontend
+    app: yolo_frontend
   annotations:
     description: "Frontend application service"
 spec:
   type: LoadBalancer
   selector:
-    app: yolo_client
-    component: frontend
+    app: yolo_frontend
   ports:
     - name: http
       protocol: TCP

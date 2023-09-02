@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mongodb
 spec:
-  clusterIP: 10.40.0.11
+  clusterIP: 10.100.0.11
   selector:
     app: mongodb
   ports:

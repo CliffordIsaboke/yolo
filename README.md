@@ -21,3 +21,10 @@ Make sure that you have the following installed:
  `npm start`
 
  ### Go ahead a nd add a product (note that the price field only takes a numeric input)
+
+## Node intstallation:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash (to install nvm)
+nvm install 13.12.0
+nvm use 13.12.0
+
+
